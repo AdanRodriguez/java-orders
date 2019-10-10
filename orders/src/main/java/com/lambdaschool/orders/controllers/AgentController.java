@@ -22,14 +22,9 @@ public class AgentController
         List<Agent> myList = agentService.findAll();
         return new ResponseEntity<>(myList, HttpStatus.OK);
     }
-    //GET http:localhost:2019/agents/agents/2
-
-    //POST http:localhost:2019/agents/agents
-
-    //PUT http:localhost:2019/agents/agents/2
 
     //DELETE http:localhost:2019/agents/agents/2
-    @DeleteMapping("/{agentid}")
+    @DeleteMapping("/agents/{agentid}")
     public ResponseEntity<?> deleteAgentById(@PathVariable long agentid)
     {
         agentService.delete(agentid);

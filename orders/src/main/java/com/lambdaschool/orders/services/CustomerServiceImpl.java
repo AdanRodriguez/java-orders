@@ -27,7 +27,8 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public Customer findById(long id) {
+    public Customer findById(long id)
+    {
         return null;
     }
 
@@ -58,12 +59,14 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public Customer update(Customer customer, long id) {
-        return null;
+    public Customer update(Customer customer, long id)
+    {
+        return customerRepos.save(customer);
     }
 
     @Override
-    public void delete(long id) {
-
+    public void delete(long id)
+    {
+        customerRepos.deleteById(id);
     }
 }

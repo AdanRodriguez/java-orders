@@ -6,10 +6,9 @@ import com.lambdaschool.orders.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,12 +25,35 @@ public class CustomerController
         return new ResponseEntity<>(myList, HttpStatus.OK);
     }
     //GET http:localhost:2019/customers/customers/2
+    @GetMapping(value = "/customers/{customerid}", produces = {"application/json"})
+    public ResponseEntity<?> findById(@PathVariable Long customerid)
+    {
+        Customer c = customerService.findById(customerid);
+        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
 
     //POST http:localhost:2019/customers/customers
+    @PostMapping(value = "/customers/new", consumes = {"application/json"})
+    public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer newCustomer)
+    {
+        customerService.save(newCustomer);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     //PUT http:localhost:2019/customers/customers/2
+    @PutMapping(value = "/customers/{customerid}", consumes = {"application/json"})
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable long customerid)
+    {
+        customerService.update(customer, customerid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     //DELETE http:localhost:2019/customers/customers
-
+    @DeleteMapping("/customers/{customerid}")
+    public ResponseEntity<?> deleteCustomerById(@PathVariable long customerid)
+    {
+        customerService.delete(customerid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

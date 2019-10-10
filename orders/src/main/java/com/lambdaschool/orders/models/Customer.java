@@ -1,6 +1,8 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -23,11 +25,15 @@ public class Customer
     private double outstandingAtm;
     private String phone;
 
-    //
+    //Many to One --- 1 agent/ many customers
     @ManyToOne
     @JoinColumn(name = "agentid",
                 nullable = false)
     private Agent agent;
+
+    //One to many ---- 1 customer/ many orders
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders = new ArrayList<>();
 
 
     //Default constructor needed if its an Entity
@@ -146,5 +152,15 @@ public class Customer
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders)
+    {
+        this.orders = orders;
     }
 }

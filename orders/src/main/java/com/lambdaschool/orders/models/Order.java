@@ -10,13 +10,11 @@ public class Order
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long orderid;
 
-    @Column (unique = true,
-             nullable = false)
     private double orderAmount;
     private double advanceAmount;
     private String orderDescription;
 
-    //
+    //Many to One --- Many orders to 1 customer
     @ManyToOne
     @JoinColumn(name = "customerid",
                 nullable = false)
@@ -28,11 +26,14 @@ public class Order
     }
 
     //Constructors
-    public Order(double orderAmount, double advanceAmount, String orderDescription) {
+    public Order(double orderAmount, double advanceAmount,Customer customer, String orderDescription)
+    {
         this.orderAmount = orderAmount;
         this.advanceAmount = advanceAmount;
+        this.customer = customer;
         this.orderDescription = orderDescription;
     }
+
 
     //Getters and Setters
     public long getOrderid() {
@@ -65,5 +66,14 @@ public class Order
 
     public void setOrderDescription(String orderDescription) {
         this.orderDescription = orderDescription;
+    }
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
     }
 }

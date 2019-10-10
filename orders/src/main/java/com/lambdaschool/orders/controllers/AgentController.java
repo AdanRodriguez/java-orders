@@ -15,7 +15,7 @@ public class AgentController
 {
     @Autowired
     private AgentService agentService;
-    //GET http:localhost:2019/agents/agents
+    //GET http:localhost:2019/agents/agents -----working
     @GetMapping(value = "/agents", produces ={"application/json"})
     public ResponseEntity<?> listAllAgents()
     {
@@ -23,7 +23,7 @@ public class AgentController
         return new ResponseEntity<>(myList, HttpStatus.OK);
     }
 
-    //DELETE http:localhost:2019/agents/agents/2
+    //DELETE http:localhost:2019/agents/agents/2 ---- working
     @DeleteMapping("/agents/{agentid}")
     public ResponseEntity<?> deleteAgentById(@PathVariable long agentid)
     {

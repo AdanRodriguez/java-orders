@@ -17,7 +17,7 @@ public class CustomerController
 {
     @Autowired
     private CustomerService customerService;
-    //GET http:localhost:2019/customers/customers
+    //GET http://localhost:2019/customers/customers ---working
     @GetMapping(value = "/customers", produces ={"application/json"})
     public ResponseEntity<?> listAllAgents()
     {
@@ -25,14 +25,14 @@ public class CustomerController
         return new ResponseEntity<>(myList, HttpStatus.OK);
     }
     //GET http:localhost:2019/customers/customers/2
-    @GetMapping(value = "/customers/{customerid}", produces = {"application/json"})
-    public ResponseEntity<?> findById(@PathVariable Long customerid)
+    @GetMapping(value = "/customers/{customerName}", produces = {"application/json"})
+    public ResponseEntity<?> findById(@PathVariable Long customerName)
     {
-        Customer c = customerService.findById(customerid);
+        Customer c = customerService.findById(customerName);
         return new ResponseEntity<>(c, HttpStatus.OK);
     }
 
-    //POST http:localhost:2019/customers/customers
+    //POST http:localhost:2019/customers/customers -----working
     @PostMapping(value = "/customers/new", consumes = {"application/json"})
     public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer newCustomer)
     {
@@ -40,7 +40,7 @@ public class CustomerController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //PUT http:localhost:2019/customers/customers/2
+    //PUT http:localhost:2019/customers/customers/2  ------working
     @PutMapping(value = "/customers/{customerid}", consumes = {"application/json"})
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable long customerid)
     {
@@ -48,7 +48,7 @@ public class CustomerController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //DELETE http:localhost:2019/customers/customers
+    //DELETE http:localhost:2019/customers/customers ----working
     @DeleteMapping("/customers/{customerid}")
     public ResponseEntity<?> deleteCustomerById(@PathVariable long customerid)
     {

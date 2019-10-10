@@ -31,7 +31,7 @@ public class Customer
     @ManyToOne
     @JoinColumn(name = "agentid",
                 nullable = false)
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties("customers")
     private Agent agent;
 
     //One to many ---- 1 customer/ many orders
